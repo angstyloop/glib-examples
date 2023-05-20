@@ -1,18 +1,18 @@
-/* find_strings_with_prefix.c
+/* find_strings_with_substring.c
  *
- * Find all strings in a given list of strings that start with a given prefix.
+ * Find all strings in a given list of strings that contain a given substring.
  * Uses GLib.
  *
  * COMPILE TEST
  *
- * gcc `pkg-config --cflags glib-2.0` -o test_find_strings_with_prefix find_strings_with_prefix.c `pkg-config --libs glib-2.0` -Dtest_find_strings_with_prefix
+ * gcc `pkg-config --cflags glib-2.0` -o test_find_strings_with_substring find_strings_with_substring.c `pkg-config --libs glib-2.0` -Dtest_find_strings_with_substring
  *
  * TEST
  *
- * ./test_find_strings_with_prefix
+ * ./test_find_strings_with_substring
  */
 
-#ifdef test_find_strings_with_prefix
+#ifdef test_find_strings_with_substring
 #include <glib-2.0/glib.h>
 #endif
 
@@ -53,7 +53,7 @@ static void append_if_match_cb( gpointer data, gpointer user_data )
  * haystacks - list of strings to search for needle
  * needle - string to find in haystacks
  */
-GList *find_strings_with_prefix( GList *haystacks, gchar *needle )
+GList *find_strings_with_substring( GList *haystacks, gchar *needle )
 {
 	/* Create a list with the needle as the only element, like
 	 * append_if_match expects.
@@ -76,7 +76,7 @@ GList *find_strings_with_prefix( GList *haystacks, gchar *needle )
 	return found;
 }
 
-#ifdef test_find_strings_with_prefix
+#ifdef test_find_strings_with_substring
 int main()
 {
 	GList *string_list = NULL, *found = NULL;
@@ -88,7 +88,7 @@ int main()
 
 	gchar* target_string = "ab";
 
-	found = find_strings_with_prefix( string_list, target_string );
+	found = find_strings_with_substring( string_list, target_string );
 
 	g_assert( g_list_length( found ) == 2 );
 
